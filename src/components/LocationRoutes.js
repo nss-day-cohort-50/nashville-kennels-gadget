@@ -1,6 +1,6 @@
 import React from "react"
 import { Route } from "react-router-dom"
-import { LocationList } from "./locations/LocationList"
+import  LocationList  from "./locations/LocationList"
 import LocationDetail from "./locations/LocationDetail"
 
 export default () => {

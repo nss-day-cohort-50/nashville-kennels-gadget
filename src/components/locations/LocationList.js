@@ -4,11 +4,15 @@ import Location from "./Location"
 import "./LocationList.css"
 
 
-export const LocationList = () => {
+export default () => {
     const [ locations, updateLocations ] = useState([])
 
     useEffect(() => {
         LocationRepository.getAll()
+        .then((locationData) => {
+            updateLocations(locationData)
+        })
+
     }, [])
 
     return (
