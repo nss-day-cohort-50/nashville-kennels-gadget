@@ -5,11 +5,14 @@ import "./EmployeeList.css"
 
 
 export default () => {
-    const [emps, setEmployees] = useState([])
+    const [employees, setEmployees] = useState([])
 
     useEffect(
         () => {
             EmployeeRepository.getAll()
+            .then((employeeData) => {
+                setEmployees(employeeData)
+            })
         }, []
     )
 
@@ -17,7 +20,7 @@ export default () => {
         <>
             <div className="employees">
                 {
-                    emps.map(a => <Employee key={a.id} employee={a} />)
+                    employees.map(employee => <Employee key={employee.id} employee={employee} />)
                 }
             </div>
         </>
