@@ -7,6 +7,7 @@ import AnimalOwnerRepository from "../../repositories/AnimalOwnerRepository"
 import useModal from "../../hooks/ui/useModal"
 import useSimpleAuth from "../../hooks/ui/useSimpleAuth"
 import OwnerRepository from "../../repositories/OwnerRepository"
+import EmployeeRepository from "../../repositories/EmployeeRepository"
 
 import "./AnimalList.css"
 import "./cursor.css"
