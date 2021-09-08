@@ -8,45 +8,7 @@ import EmployeeRepository from "../../repositories/EmployeeRepository"
 
 
 export default ({location}) => {
-    const [activeNorth, setActiveNorth] = useState("")
-    const [activeSouth, setActiveSouth] = useState("")
-    const [activeEmpSouth, setActiveEmpSouth] = useState("")
-    const [activeEmpNorth, setActiveEmpNorth] = useState("")
-    const [animals, setAnimals] = useState([])
-    const [locations, setLocations] = useState([])
-    const [employees, setEmployees] = useState([])
-        
-    useEffect(() => {
-        AnimalRepository.getAll()
-        .then((animalData) => {
-            setAnimals(animalData)
-        })
-
-    }, [])
-
-    useEffect(() => {
-        EmployeeRepository.getAll()
-        .then((employeeData) => {
-            setEmployees(employeeData)
-        })
-
-    }, [])
-
-    useEffect(() => {
-        const activateAnimalCounterNorth = animals.filter(animal => animal.id > 0 && animal.locationId === 1).length
-        setActiveNorth(`${activateAnimalCounterNorth} animals`)}, [animals])
-
-    useEffect(() => {
-        const activateAnimalCounterSouth = animals.filter(animal => animal.id > 0 && animal.locationId === 2).length
-        setActiveSouth(`${activateAnimalCounterSouth} animals`)}, [animals])
-
-    useEffect(() => {
-        const activateEmpCounterNorth = employees.filter(employee => employee.employeeLocations.locationId === 1).length
-        setActiveEmpNorth(`${activateEmpCounterNorth} employees`)}, [employees])
-
-    useEffect(() => {
-        const activateEmpCounterSouth = employees.filter(employee => employee.employeeLocations.locationId === 2).length
-        setActiveEmpSouth(`${activateEmpCounterSouth} employees`)}, [employees])
+    
 
     return (
         <>
@@ -66,12 +28,23 @@ export default ({location}) => {
                 </h5>
             </section>
             <section>
-                {activeNorth} animals
-                {activeSouth}
+            employees: {/* <Link className=""
+                        to={{
+                            pathname: `/locations/${location.id}`,
+                            state: { location: location }
+                        }}>
+                        employees :{location.employeeLocations.length}
+                    </Link> */ location.employeeLocations.length}
+                
             </section>
             <section>
-                {activeEmpNorth} employees
-                {activeEmpSouth}
+            animals: {/* <Link className=""
+                        to={{
+                            pathname: `/locations/${location.id}`,
+                            state: { location: location }
+                        }}>
+                        animals: {location.animals.length}
+                    </Link> */location.animals.length}
             </section>
         </article>
     </>
