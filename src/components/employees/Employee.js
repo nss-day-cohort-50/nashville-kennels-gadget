@@ -5,13 +5,14 @@ import useResourceResolver from "../../hooks/resource/useResourceResolver";
 import useSimpleAuth from "../../hooks/ui/useSimpleAuth";
 import person from "./person.png"
 import "./Employee.css"
+import LocationRepository from "../../repositories/LocationRepository";
 
 
 export default ({ employee }) => {
     const [animalCount, setCount] = useState(0)
     const [location, markLocation] = useState({ name: "" })
     const [classes, defineClasses] = useState("card employee")
-    const { employeeId } = useParams()
+    const { employeeId,locationId } = useParams()
     const { getCurrentUser } = useSimpleAuth()
     const { resolveResource, resource } = useResourceResolver()
 
@@ -23,11 +24,26 @@ export default ({ employee }) => {
     }, [])
 
     useEffect(() => {
-        if (resource?.employeeLocations?.length > 0) {
-            markLocation(resource.employeeLocations[0])
+        
+        if (resource?.locations?.length > 0) {
+            markLocation(resource.locations[0].location)
         }
     }, [resource])
 
+    // useEffect(() => {
+        
+    //     if (locationId) {
+    //         defineClasses("card employee--single")
+    //         resolveResource(location,locationId,LocationRepository.get)
+    //     }
+    // }, [])
+
+    // useEffect(() => {
+    //     if (animalCaretaker.animalId ===animalId && animalCaretaker.userId === user.id) {
+    //         setCount(resource.employeeLocations[0])
+    //     }
+    // }, [resource])
+console.log(location)
     return (
         <article className={classes}>
             <section className="card-body">
@@ -46,14 +62,16 @@ export default ({ employee }) => {
 
                     }
                 </h5>
+                {console.log(resource)}
+               { console.log(location)}
                 {
                     employeeId
                         ? <>
                             <section>
-                                Caring for 0 animals
+                            Caring for {resource?.animals?.length} animals
                             </section>
                             <section>
-                                Working at unknown location
+                             working at {location.name}
                             </section>
                         </>
                         : ""
